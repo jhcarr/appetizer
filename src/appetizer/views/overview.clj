@@ -1,0 +1,40 @@
+(ns appetizer.views.overview
+  (:require [hiccup.core :as html]
+            [net.cgrand.enlive-html :as enlive]
+            [clojure.java.jdbc :as jdbc]
+            [clojure.java.jdbc.sql :as sql])
+  (:use [appetizer.models.db :only (db)]))
+
+(defn get-unique-products
+  [database]
+  (let [sql-fn-keyword (keyword "COUNT(version)")
+        sql-query (sql/select [:product :version sql-fn-keyword] :checkins "GROUP BY product, version")]
+    (jdbc/query database sql-query)))
+
+(defn make-table-products
+  []
+  [:table {:class "table table-striped"}
+   [:thead [:th "Product"] [:th "Version"] [:th "Checkins"]]
+   [:tbody
+    (for [product (get-unique-products (db))]
+      [:tr {}
+       [:td (product :product)]
+       [:td (product :version)]
+       [:td (product :count)]])]])
+
+(defn make-overview
+  []
+  (let [changes
+        [[:div#main]
+         (enlive/content (enlive/html (make-table-products)))
+         [:li#overview]
+         (fn [node] (assoc node :attr {:class "active"}))]]
+    (enlive/emit*
+      (enlive/at (enlive/html-resource "appetizer/views/layout.html")
+                 [:div#main]
+                 (enlive/content (enlive/html (make-table-products)))
+                 [:#overview]
+                 (fn [node] (assoc node :attrs {:id "overview" :class "active"}))))))
+
+
+

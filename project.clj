@@ -15,6 +15,6 @@
                  [postgresql/postgresql "9.1-901.jdbc4"]
                  [org.hsqldb/hsqldb "2.2.9"]]
   :plugins [[lein-ring "0.8.5"]]
-  :ring {:handler appetizer.handler/app}
+  :ring {:handler appetizer.controllers.handler/app}
   :profiles
   {:dev {:dependencies [[ring-mock "0.1.5"]]}})
