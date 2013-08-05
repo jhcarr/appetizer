@@ -1,7 +1,8 @@
 (ns appetizer.controllers.handler
   (:use compojure.core
         [net.cgrand.enlive-html]
-        [appetizer.views.overview :only (make-overview)])
+        [appetizer.views.overview :only (make-overview)]
+        [appetizer.views.index :only (make-index)])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [appetizer.views.layout :as layout]))
@@ -17,7 +18,7 @@
 
 ;;Enlive
 (defroutes app-routes
-  (GET "/" [] (enlive-layout "Welcome to my humble abode!"))
+  (GET "/" [] (make-index))
   (GET "/overview" [] (make-overview))
   (GET "/about" [] (enlive-layout "FIX ME"))
   (GET "/contact" [] (enlive-layout "MORE FIX ME"))

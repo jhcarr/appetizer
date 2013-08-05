@@ -8,26 +8,35 @@
     <meta name="author" content="Andrew Roetker">
 
     <!-- Le styles -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/general.css" rel="stylesheet">
-    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
 
   </head>
 
   <body>
 
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+      <div>
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/"><img class='logoImage logoImageHeader' src="/img/puppetlabslogo.png" alt="Puppet Labs">Appetizer</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li id="overview"><a href="/overview">Overview</a></li>
+          <a class="navbar-brand" href="/"><img class='logoImage logoImageHeader' src="/img/puppetlabslogo.png" alt="Puppet Labs">Appetizer</a>
+          <div class="nav-collapse collapse nav-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li id="overview" class="dropdown">
+                <a data-toggle="dropdown" id="dLabel" class="dropdown-toggle"  href="#">Overview <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/overview">Overview</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Hipster Chalkboard</li>
+                  <li><a href="/about">About</a></li>
+                  <li><a href="/contact">Contact</a></li>
+                </ul>
+              </li>
               <li id="about"><a href="/about">About</a></li>
               <li id="contact"><a href="/contact">Contact</a></li>
             </ul>
@@ -36,18 +45,13 @@
       </div>
     </div>
 
-    <div class="container">
-
-      <h1>Appetizer is a dashboard for Dujour</h1>
-      <p>This is a temporary dashboard.
-      <br> All you get is this message and a barebones HTML document.</p>
-    </div>
-
+    <!-- This is where the body should be inserted -->
     <div class="container" id='main'></div><!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-2.0.3.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
   </body>
