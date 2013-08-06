@@ -20,6 +20,7 @@
 (defroutes app-routes
   (GET "/" [] (make-index))
   (GET "/overview" [] (make-overview))
+  (GET "/demograph" {} (enlive-layout "D3 Demonstration graph will go here."))
   (GET "/about" [] (enlive-layout "FIX ME"))
   (GET "/contact" [] (enlive-layout "MORE FIX ME"))
   (route/resources "/")
