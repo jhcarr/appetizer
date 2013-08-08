@@ -30,7 +30,7 @@ body {
     padding: 3px;
     margin: 1px;
     color: white;
-    }
+}
 
 .chart svg {
     color: black;
@@ -39,8 +39,8 @@ body {
 .chart rect {
     stroke: white;
     fill: steelblue;
-    }
+}
 
 .chart text {
     fill: white;
-    }
+}
