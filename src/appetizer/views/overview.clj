@@ -12,17 +12,18 @@
     (jdbc/query database sql-query)))
 
 (defn make-table-products []
-  [:table {:class "table table-striped"}
+  [:div {:class "checkin-table"} [:table {:class "table table-striped"}
    [:thead [:th "Product"] [:th "Version"] [:th "Checkins"]]
    [:tbody
     (for [product (get-unique-products (db))]
       [:tr {}
        [:td (product :product)]
        [:td (product :version)]
-       [:td (product :count)]])]])
+       [:td (product :count)]])]]])
 
 (defn make-overview []
   (enlive/emit*
     (enlive/at (enlive/html-resource "appetizer/views/layout.html")
                [:div#main]
-               (enlive/content (enlive/html (make-table-products))))))
+               (enlive/content (enlive/html (make-table-products))
+                               (enlive/html-resource "appetizer/views/overview.html")))))

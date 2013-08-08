@@ -10,3 +10,9 @@ body {
     height: 30px;
     width: 35px;
 }
+.checkin-table {
+    position: relative;
+    height: 400px;
+    margin-top: 10px;
+    overflow: auto;
+}
