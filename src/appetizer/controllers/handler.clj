@@ -2,7 +2,8 @@
   (:use compojure.core
         [net.cgrand.enlive-html]
         [appetizer.views.overview :only (make-overview)]
-        [appetizer.views.index :only (make-index)])
+        [appetizer.views.index :only (make-index)]
+        [appetizer.views.demograph :only (make-demograph)])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [appetizer.views.layout :as layout]))
@@ -20,7 +21,7 @@
 (defroutes app-routes
   (GET "/" [] (make-index))
   (GET "/overview" [] (make-overview))
-  (GET "/demograph" {} (enlive-layout "D3 Demonstration graph will go here."))
+  (GET "/demograph" {} (make-demograph))
   (GET "/about" [] (enlive-layout "FIX ME"))
   (GET "/contact" [] (enlive-layout "MORE FIX ME"))
   (route/resources "/")
