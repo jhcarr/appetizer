@@ -26,4 +26,4 @@
                (enlive/content
                 (concat
                  (enlive/html (format-query-results))
-                 (enlive/html-resource "appetizer/views/demograph_test.html"))))))
+                 (enlive/html-resource "appetizer/views/demograph.html"))))))
