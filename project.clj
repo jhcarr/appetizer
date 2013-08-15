@@ -2,6 +2,8 @@
   :description "Appetizer the Dujour Dashboard"
   :url "http://github.com/"
   :dependencies [[org.clojure/clojure "1.5.1"]
+                 ;; json 
+                 [cheshire "5.2.0"]
                  ;; Routing library
                  [compojure "1.1.5"]
                  ;; Templating for Cojure

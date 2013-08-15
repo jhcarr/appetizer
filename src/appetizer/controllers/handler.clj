@@ -3,7 +3,8 @@
         [net.cgrand.enlive-html]
         [appetizer.views.overview :only (make-overview)]
         [appetizer.views.index :only (make-index)]
-        [appetizer.views.demograph :only (make-demograph)])
+        [appetizer.views.demograph :only (make-demograph)]
+        [appetizer.views.dc_experiment :only (make-dc-experiment)])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [appetizer.views.layout :as layout]))
@@ -22,6 +23,7 @@
   (GET "/" [] (make-index))
   (GET "/overview" [] (make-overview))
   (GET "/demograph" {} (make-demograph))
+  (GET "/dc_experiment" {} (make-dc-experiment))  
   (GET "/about" [] (enlive-layout "FIX ME"))
   (GET "/contact" [] (enlive-layout "MORE FIX ME"))
   (route/resources "/")
