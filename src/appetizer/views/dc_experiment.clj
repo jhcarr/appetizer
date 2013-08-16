@@ -21,8 +21,8 @@
 (defn format-query-results []
   "Formats query for crossfilter in dc.js library."
   (let [results-as-string ()])
-  [:script {:type "text/javascript"} (format "var queryData = %s;"
-                                             (json/generate-string (get-checkins (db))))])
+  [:script (format "var queryData = %s;"
+                   (json/generate-string (get-checkins (db))))])
 
 (defn make-dc-experiment []
   (enlive/emit*
@@ -31,4 +31,9 @@
                (enlive/content
                 (concat
                  (enlive/html (format-query-results))
-                 (enlive/html-resource "appetizer/views/dc_experiment.html"))))))
+                 (enlive/html-resource "appetizer/views/dc_experiment.html")))
+               [:div#le_javascript]
+               (enlive/content
+                (concat
+                 (enlive/html [:script {:src "/js/dc_experiment.js"} ])
+                 (enlive/html [:script "$(document).ready(drawExperiment())"]))))))

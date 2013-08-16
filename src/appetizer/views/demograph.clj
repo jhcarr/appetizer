@@ -14,10 +14,10 @@
 
 (defn format-query-results []
   "This section formats the query data for rendering d3."
-  [:script {:type "text/javascript"} (format "var queryData = [%s]"
-                                             (->> (get-unique-products (db))
-                                                  (map :count)
-                                                  (join ", ")))])
+  [:script (format "var queryData = [%s]"
+                   (->> (get-unique-products (db))
+                        (map :count)
+                        (join ", ")))])
 
 (defn make-demograph []
   (enlive/emit*
@@ -26,4 +26,9 @@
                (enlive/content
                 (concat
                  (enlive/html (format-query-results))
-                 (enlive/html-resource "appetizer/views/demograph.html"))))))
+                 (enlive/html-resource "appetizer/views/demograph.html")))
+               [:div#le_javascript]
+               (enlive/content
+                (concat
+                 (enlive/html [:script {:src "/js/demograph.js"}])
+                 (enlive/html [:script "$(document).ready(drawDemograph())"]))))))
