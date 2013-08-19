@@ -1,4 +1,4 @@
-(ns appetizer.views.dc_experiment
+(ns appetizer.views.checkins_by_date
   (:require [hiccup.core :as html]
             [net.cgrand.enlive-html :as enlive]
             [clojure.java.jdbc :as jdbc]
@@ -9,31 +9,28 @@
 
 (defn get-unique-products
   [database]
-  (let [sql-fn-keyword (keyword "COUNT(version)")
-        sql-query (sql/select [:product :version sql-fn-keyword] :checkins "GROUP BY product, version")]
-    (jdbc/query database sql-query)))
-
-(defn get-checkins
-  [database]
-  (let [sql-query (sql/select [:product :version :timestamp :ip] :checkins)]
+  (let [sql-count-fn (keyword "COUNT(version)")
+        sql-date-fn (keyword "DATE(timestamp)")
+        sql-query (sql/select [:product sql-date-fn sql-count-fn]
+                              :checkins "WHERE version ~ '^\\d+\\.\\d+\\.\\d+$' GROUP BY product, DATE(timestamp) LIMIT 10000")]
     (jdbc/query database sql-query)))
 
 (defn format-query-results []
   "Formats query for crossfilter in dc.js library."
   (let [results-as-string ()])
   [:script (format "var queryData = %s;"
-                   (json/generate-string (get-checkins (db))))])
+                   (json/generate-string (get-unique-products (db))))])
 
-(defn make-dc-experiment []
+(defn make-checkins-by-date []
   (enlive/emit*
     (enlive/at (enlive/html-resource "appetizer/views/layout.html")
                [:div#main]
                (enlive/content
                 (concat
                  (enlive/html (format-query-results))
-                 (enlive/html-resource "appetizer/views/dc_experiment.html")))
+                 (enlive/html-resource "appetizer/views/checkins_by_date.html")))
                [:div#le_javascript]
                (enlive/content
                 (concat
-                 (enlive/html [:script {:src "/js/dc_experiment.js"} ])
-                 (enlive/html [:script "$(document).ready(draw())"]))))))
+                 (enlive/html [:script {:src "/js/charts.js"} ])
+                 (enlive/html [:script "$(document).ready(drawCheckins())"]))))))
