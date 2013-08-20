@@ -1,5 +1,5 @@
-var barGap = 20;
-var xBuff;
+var barGap = 5;
+var datePadding = 10;
 
 /* 
    Other charts may be added here in the same way:
@@ -7,11 +7,7 @@ var xBuff;
    <rendering function>
 */
 
-function checkinsDemonstration (location, dimension, group1, group2) {
-
-    console.log("Begin checkinsDemonstration");
-
-//    var dimensionGroup = dimension.group().reduceCount().orderNatural();
+function checkinsDemonstration (location, dimension, lowDay, highDay, group1, group2) {
 
     return dc.barChart(location)
         .height(450)
@@ -20,13 +16,37 @@ function checkinsDemonstration (location, dimension, group1, group2) {
         .centerBar(true)
         .dimension(dimension)
         .group(group1)
+        .xUnits(d3.time.days) // function calculating bar width
+        .renderHorizontalGridLines(true)
+        .elasticX(true)
+        .xAxisPadding(datePadding)
         .stack(group2)
-        .x(d3.time.scale().domain([new Date(2012, 9, 9), new Date(2013, 6, 20)]))
-        .margins({top: 50, bottom: 50, right: 50, left: 50})
+        .x(d3.time.scale().domain([ lowDay, highDay ]))
+        .brushOn(false)
+        .margins({top: 20, bottom: 20, right: 30, left: 30})
         .xAxis().tickFormat(d3.time.format("%Y-%m-%d"));
 }
 
+function checkinsLineGraph (location, dimension, lowDay, highDay, group1, group2) {
+
+    return dc.lineChart(location)
+        .height(450)
+        .width(900)
+        .dimension(dimension)
+        .group(group1)
+        .elasticX(true)
+        .xAxisPadding(datePadding)
+        .renderArea(true)
+        .stack(group2)
+        .x(d3.time.scale().domain([ lowDay, highDay ]))
+        .margins({top: 20, bottom: 20, right: 30, left: 30})
+        .xAxis().tickFormat(d3.time.format("%Y-%m-%d"));
+
+}
+
 function drawCheckins() {
+
+// Format data for display
 
 console.log(queryData);
 
@@ -34,11 +54,18 @@ var filtered = crossfilter(queryData);
 
 var day = filtered.dimension( function (f) { return new Date(f.date);} );
 
+var highestDay = new Date( day.top(1)[0].date );
+var lowestDay = new Date( day.bottom(1)[0].date );
+
 var puppetdb_by_day = day.group(d3.time.day).reduceSum( function(p) { if ("puppetdb" == p.product) {return p.count;} else return 0; });
 
 var pemaster_by_day = day.group(d3.time.day).reduceSum( function(p) { if ("pe-master" == p.product) {return p.count;} else return 0; });
 
-checkinsDemonstration( '#checkins_by_date', day, puppetdb_by_day, pemaster_by_day );
+// Draw data
+
+checkinsDemonstration( "#checkins_by_date_bars", day, lowestDay, highestDay, puppetdb_by_day, pemaster_by_day );
+
+checkinsLineGraph( "#checkins_by_date_lines", day, lowestDay, highestDay, puppetdb_by_day, pemaster_by_day );
 
 dc.renderAll();
 
