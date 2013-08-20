@@ -9,7 +9,7 @@
 
 (defn get-unique-products
   [database]
-  (let [sql-count-fn (keyword "COUNT(version)")
+  (let [sql-count-fn (keyword "COUNT(DISTINCT ip)")
         sql-date-fn (keyword "DATE(timestamp)")
         sql-query (sql/select [:product sql-date-fn sql-count-fn]
                               :checkins "WHERE version ~ '^\\d+\\.\\d+\\.\\d+$' GROUP BY product, DATE(timestamp) LIMIT 10000")]
