@@ -34,6 +34,7 @@ function checkinsLineGraph (location, dimension, lowDay, highDay, group1, group2
         .width(900)
         .dimension(dimension)
         .group(group1)
+        .renderHorizontalGridLines(true)
         .elasticX(true)
         .xAxisPadding(datePadding)
         .renderArea(true)

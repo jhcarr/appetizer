@@ -1,10 +1,54 @@
+/* 
+   Puppet Labs Official Color Palette:
+   
+   Dark Blue/Purple
+   ===========================================
+    Tint     |  Hex Value  |  Screen Elements
+   ===========================================
+    100%     |   #302b6d   |  rect.bar, path.line, circle.dot, path.area
+    90%      |   #44407b   |
+    80%      |   #59558a   |
+    70%      |   #6e6a98   |
+    60%      |   #827fa7   |
+    50%      |   #9795b6   |
+    40%      |   #acaac4   |
+    30%      |   #c0bfd3   |
+
+   Gold
+   ===========================================
+    Tint     |  Hex Value  |  Screen Elements
+   ===========================================
+    100%     |   #efa92d   | rect.stack1, g.stack1 path.line, g.stack1 circle.dot, gstack1 path.area
+    90%      |   #f0b142   | 
+    80%      |   #f2ba57   |
+    70%      |   #f3c26c   |
+    60%      |   #f5cb81   |
+    50%      |   #f7d496   |
+    40%      |   #f8dcab   |
+    30%      |   #fae5c0   |
+
+   Purple
+   ===========================================
+    Tint     |  Hex Value  |  Screen Elements
+   ===========================================
+    100%     |   #7c6aab   | rect.stack2, g.stack2 path.line g.stack2 circle.dot, gstack2 path.area
+    90%      |   #8978b3   | 
+    80%      |   #9687bb   |
+    70%      |   #a396c4   |
+    60%      |   #b0a5cc   |
+    50%      |   #bdb4d5   |
+    40%      |   #cac3dd   |
+    30%      |   #d7d2e5   |
+
+*/
+
 .dc-chart {
     float: left;
 }
 
 .dc-chart rect.bar {
     stroke: none;
-    fill: steelblue;
+    fill: #302B6D;
     cursor: pointer;
 }
 
@@ -14,12 +58,12 @@
 
 .dc-chart rect.stack1 {
     stroke: none;
-    fill: red;
+    fill: #efa92d;
 }
 
 .dc-chart rect.stack2 {
     stroke: none;
-    fill: green;
+    fill: #8978b3;
 }
 
 .dc-chart rect.deselected {
@@ -94,28 +138,28 @@
 
 .dc-chart path.line {
     fill: none;
-    stroke: steelblue;
+    stroke: #302b6d;
     stroke-width: 1.5px;
 }
 
 .dc-chart circle.dot {
-    fill: steelblue;
+    fill: #302b6d;
 }
 
 .dc-chart g.stack1 path.line {
-    stroke: green;
+    stroke: #efa92d;
 }
 
 .dc-chart g.stack1 circle.dot {
-    fill: green;
+    fill: #efa92d;
 }
 
 .dc-chart g.stack2 path.line {
-    stroke: red;
+    stroke: #7c6aab;
 }
 
 .dc-chart g.stack2 circle.dot {
-    fill: red;
+    fill: #7c6aab;
 }
 
 .dc-chart g.dc-tooltip path {
@@ -125,17 +169,17 @@
 }
 
 .dc-chart path.area {
-    fill: steelblue;
+    fill: #302b6d;
     fill-opacity: .3;
     stroke: none;
 }
 
 .dc-chart g.stack1 path.area {
-    fill: green;
+    fill: #efa92d;
 }
 
 .dc-chart g.stack2 path.area {
-    fill: red;
+    fill: #7c6aab;
 }
 
 .dc-chart .node {
