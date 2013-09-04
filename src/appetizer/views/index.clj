@@ -12,5 +12,4 @@
                [:div#main]
                (enlive/content (enlive/html
                                  [:h1 "Appetizer is the dashboard for Dujour"]
-                                 [:p "This is a temporary dashboard."
-                                  [:br "All you get is one silly table"]])))))
+                                 [:p "This is a temporary dashboard."])))))

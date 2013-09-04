@@ -3,6 +3,7 @@
         [net.cgrand.enlive-html]
         [appetizer.views.overview :only (make-overview)]
         [appetizer.views.index :only (make-index)]
+        [appetizer.views.all_products :only (make-all-products)]
         [appetizer.views.demograph :only (make-demograph)]
         [appetizer.views.dc_experiment :only (make-dc-experiment)]
         [appetizer.views.checkins_by_date :only (make-checkins-by-date)])
@@ -22,7 +23,8 @@
 ;;Enlive
 (defroutes app-routes
   (GET "/" [] (make-index))
-  (GET "/overview" [] (make-overview))
+  (GET "/overview" {} (make-overview))
+  (GET "/all_products" {} (make-all-products))
   (GET "/demograph" {} (make-demograph))
   (GET "/dc_experiment" {} (make-dc-experiment))
   (GET "/checkins_by_date" {} (make-checkins-by-date))
